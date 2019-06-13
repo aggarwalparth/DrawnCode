@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block content %}
+<script type="text/javascript">
+    function selectStyle() {
+        var e = document.getElementById("styles");
+        var str = e.options[e.selectedIndex].value;
+        // window.alert(str);
+        const fs = require('fs')
+        fs.writeFile('/home/ubuntu/vedant/cs671/drawncode/src/style.txt',str,(err) => {if (err) window.alert(str);});
+        // file = fopen("/home/ubuntu/vedant/cs671/drawncode/src/style.txt", 3);// opens the file for writing
+        // fwrite(file, str);// str is the content that is to be written into the file.
+        }
+</script>
+<h2>Draw The Webpage, We Will Code It !!</h2>
+
+<div>
+    <form id="upload-file" method="post" enctype="multipart/form-data">
+        <label for="imageUpload" class="upload-label">
+            Choose your image
+        </label>
+        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+    </form>
+
+    <div class="image-section" style="display:none;">
+        <div class="img-preview">
+            <div id="imagePreview">
+            </div>
+        </div>
+                <div class="style-section">
+                <h4>Choose the style</h4>
+    <select id="styles" style="display: none;" onclick="selectStyle();">
+  <option value="s1">Style 1</option>
+  <option value="s2">Style 2</option>
+  <option value="s3">Style 3</option>
+  <!-- <option value="audi">Audi</option> -->
+</select>
+</div>
+        <div>
+            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Get the code</button>
+        </div>
+    </div>
+    <div class="loader" style="display:none;"></div>
+
+    <h3 id="result">
+        <span> </span>
+    </h3>
+    <button type="button" class="btn btn-primary btn-lg " id="btn-show" style="display: none;">Preview</button>
+    <button type="button" class="btn btn-primary btn-lg " id="btn-down" style="display: none;">Download</button>
+</div>
+
+{% endblock %}
